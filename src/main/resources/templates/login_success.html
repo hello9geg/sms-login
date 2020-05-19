@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>模仿一个主页</title>
+</head>
+<body>
+
+   <!--  thymeleaf自带的(-- --) -->
+   <h3>欢迎您:[[${userInfo.phone}]]</h3>
+
+   <!-- 注册成功重定向到主页面 顺便把用户存取到会话中, 防止表单重复提交,重定向到后台页面 -->
+   <h3>欢迎您:[[${session.userInfo.phone}]]</h3>
+
+
+</body>
+</html>

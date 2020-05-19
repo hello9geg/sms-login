@@ -1,0 +1,16 @@
+# ?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+# 设置时区 要不然连接出错
+
+# type: com.alibaba.druid.pool.DruidDataSource
+# 使用Druid数据池    Springboot默认使用的是Hikari连接池  效率来讲的话是默认的要高,但是Druid数据源有一套自带的安全管理机制,用的也比较多
+
+# 使用这个文件连接Druid数据池 和用properties文件连接Druid数据池都可以使用
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ssmlogin?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123.com
+    type: com.alibaba.druid.pool.DruidDataSource
+

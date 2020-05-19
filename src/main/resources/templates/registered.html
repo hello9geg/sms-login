@@ -1,0 +1,236 @@
+<!doctype html>
+<!-- 引入templates的命名空间 xmlns:th="http://www.thymeleaf.org" -->
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" >
+    <link href="css/font-awesome.min.css" type="text/javascript" rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link href="css/bootsnav.css" type="text/css" rel="stylesheet" th:href="@{/css/bootsnav.css}">
+    <link href="css/normalize.css" type="text/css" rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link href="css/css.css" rel="stylesheet" type="text/css" th:href="@{/css/css.css}">
+
+    <script src="js/jquery-1.11.0.min.js" type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script src="js/jquery.step.js" th:src="@{/js/jquery.step.js}"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="js/bootsnav.js" type="text/javascript" th:src="@{/js/bootsnav.js}"></script>
+
+    <script src="js/jquery.js" type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <!--[if IE]>
+    <script src="js/html5.js"></script><![endif]-->
+    <title>注册</title>
+</head>
+
+<body class="logobg_style">
+<div id="large-header" class="large-header login-page">
+    <canvas id="demo-canvas" width="1590" height="711"></canvas>
+    <div class="Retrieve_style">
+        <div class="Retrieve-content step-body" id="myStep">
+            <h1 class="title_name">用户注册</h1>
+            <div class="step-header">
+                <ul>
+                    <li><p>输入电话</p></li>
+                    <li><p>确认密码</p></li>
+                    <li><p>成功</p></li>
+                </ul>
+            </div>
+            <div class="step-content">
+                <div class="step-list login_padding">
+
+                    <!-- 大表单 -->
+                    <form role="form" id="form_login" class="">
+
+                        <div class="form-group clearfix">
+                            <div class="input-group col-lg-8 col-md-8 col-xs-8">
+                                <div class="input-group-addon"><i class="icon_phone"></i></div>
+
+                                <!-- 输入的手机号的框 -->
+                                <input type="text" class="form-control text_phone" name="phone" id="phone"
+                                       placeholder="你的手机号" autocomplete="off">
+                            </div>
+
+                            <!-- 获取验证码的按钮 -->
+                            <div class="col-lg-4 col-md-4 col-xs-4 fl"><input type="button" id="sms-input" class="btn_mfyzm"
+                                                                              value="获取验证码" onclick="SendSMS()"/>
+                            </div>
+
+                        </div>
+                        <div class="form-group clearfix">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="icon_yanzhen"></i></div>
+
+                                <!-- 输入短信验证码的框 -->
+                                <input type="text" class="form-control" name="Verification" id="sms-code"
+                                       placeholder="短信验证码" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="tishi"></div>
+                    </form>
+
+                        <div class="form-group">
+                            <!-- 下一步按钮 disabled="disabled" 如果没输入手机号和验证码是不允许点击的 -->
+                            <button class="btn btn-danger btn-block btn-login" id="applyBtn" disabled="disabled" >下一步</button>
+                        </div>
+
+                </div>
+
+                <div class="step-list">
+
+                    <form method="post" role="form" id="" class="login_padding">
+                        <div class="form-group clearfix">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="icon_password"></i>
+                                </div>
+
+                                <!-- 第一个密码框 -->
+                                <input type="password" class="form-control" name="password" id="password"
+                                       placeholder="输入密码" autocomplete="off">
+
+                            </div>
+
+                        </div>
+                        <div class="form-group clearfix">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="icon_password"></i>
+                                </div>
+
+                                <!-- 第二个密码框 -->
+                                <input type="password" class="form-control" name="confirmpwd" id="confirmpwd"
+                                       placeholder="再次密码" autocomplete="off">
+
+                            </div>
+                        </div>
+                        <div class="tishis"></div>
+                        <div class="form-group">
+                            <a href="javascript:void(0);" type="submit" class="btn btn-danger btn-block btn-login"
+                               id="submitBtn">注册</a>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="step-list">
+                    <div class="ok_style center">
+                        <h2><img src="images/ok.png" th:src="@{/images/ok.png}"></h2>
+
+                        <!-- 写一个定时器的效果（倒计时的效果）已完成在jquery.step.js下的28行-->
+                        <h5 class="color2 mtb20">你已成功注册会员<b id="Os">5</b>秒后跳转到首页</h5>
+                    </div>
+                </div>
+
+                <!-- 自己写一个隐藏表单 -->
+                <form  hidden  id="sms_form" th:action="@{/userController/register}" method="post">
+                    <input id="sms_userName" name="phone"/>
+                    <input id="sms_password" name="password"/>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/TweenLite/TweenLite.min.js" th:src="@{/js/TweenLite/TweenLite.min.js}"></script>
+<script src="js/TweenLite/EasePack.min.js" th:src="@{/js/TweenLite/EasePack.min.js}"></script>
+<script src="js/TweenLite/rAF.js" th:src="@{/js/TweenLite/rAF.js}"></script>
+<script src="js/TweenLite/demo-1.js" th:src="@{/js/TweenLite/demo-1.js}"></script>
+
+
+<!-- 引入layer js (这个脚本主要是做弹出层的效果 也就变得好看点)很不错-->
+<script src="js/layer/layer.js" th:src="@{/js/layer/layer.js}"></script>
+
+<!-- th:inline="javascript" 可以在javascript使用thymeleaf语法 -->
+<script type="text/javascript" th:inline="javascript">
+
+    var tiem = 5;
+    var InterValOjb;
+
+    //用于存储 回调函数的返回值
+    var sms;
+
+    function timer() {
+        if(tiem == 0){
+            $("#sms-input").val("重新获取验证码");
+
+            //为什么要在这里设置为又把tiem设置为5呢？
+            // 原因就是为下一次点击按钮做准备，如果下一次点击按钮那就是等于5了，就会走else了，
+            //然后这样不断的循环，只要有人点按钮就会触发这个事件
+            tiem = 5;
+
+            //点击完一次在设置为false 这里使用原生的Jquery
+            document.getElementById("sms-input").disabled = false;
+
+            //如果时间等于0秒的话,那就删除定时器
+            window.clearInterval(InterValOjb);
+        }else{
+            tiem --;
+            $("#sms-input").val(tiem+"秒");
+        }
+    }
+
+    //把按钮隐藏30s的效果
+    function SendSMS() {
+
+        //获取手机号，使用正则表达式来验证手机号的正确与否
+        var phone = $("#phone").val();
+        if((/^1(3|4|5|6|7|8|9)\d{9}$/.test(phone))){
+
+            //发送Ajax请求 这里虽然会显示错误，但是不会影响程序的运行
+            $.post([[@{~/userController/sms}]],{"smsphone":phone},function (data) {
+
+                //如果该手机号已被注册过的话那就不能注册了
+                if(data.message == false){
+                    layer.msg("该手机号已被注册");
+                    return false;
+                }else{
+                    //把回调函数的结果 赋值给这个公共变量
+                    sms = data.sms;
+                    layer.msg("验证码发送成功,请注意查收");
+                    //把用户输入的手机号 添加到隐藏表单手机号
+                    $("#sms_userName").val(phone);
+                }
+            },"json");
+
+            //设置按钮的只读属性
+            $("#sms-input").attr("disabled","true");
+
+            //每隔一千毫秒(1秒)就调用一次这个timer方法
+            InterValOjb = window.setInterval(timer,1000);
+        }else{
+            layer.msg("手机格式有误");
+            return false;
+        }
+    }
+
+    //验证码的离焦事件（失去焦点） 判断密码是否正确
+    $("#sms-code").blur(function () {
+        //获取用户输入的验证码
+        var code = $("#sms-code").val();
+
+        //获取真正的验证码
+
+        // 第一种方法(有误):
+        // 第一次是获取不到值的 因为使用thymeleaf模板引擎第一次进入这个页面它会自动渲染，（所以得到的结果就是null）
+        // 但是你的离焦事件启动完了之后就会有值，只要你再次刷新页面(重新渲染)那么就会又有值了
+        //var sms =  [[${session.sms}]];
+
+
+        //第二种方法
+        if(code == sms){
+            layer.msg("验证码正确");
+            $("#applyBtn").attr("disabled",null);
+        }else{
+            layer.msg("验证码输入有误,请重新输入");
+            $("#applyBtn").attr("disabled","disabled");
+            return;
+        }
+
+    });
+</script>
+
+</body>
+</html>
+
