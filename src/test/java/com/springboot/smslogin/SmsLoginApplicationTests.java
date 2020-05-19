@@ -21,7 +21,6 @@ class SmsLoginApplicationTests {
         Connection connection = dataSource.getConnection();
         System.out.println(connection);
 
-
     }
 
 }
